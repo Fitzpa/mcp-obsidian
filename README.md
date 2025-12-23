@@ -128,6 +128,110 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 ```
 </details>
 
+#### OpenCode
+
+[OpenCode](https://github.com/sst/opencode) is an AI-powered code editor that supports MCP servers. You can integrate mcp-obsidian with OpenCode by adding it to your configuration.
+
+##### Configuration
+
+Add mcp-obsidian to your OpenCode configuration file:
+
+**Global configuration:** `~/.config/opencode/opencode.json`
+
+**Project-specific configuration:** `./opencode.json` in your project root
+
+<details>
+  <summary>Published Server Configuration</summary>
+
+```json
+{
+  "mcp": {
+    "mcp-obsidian": {
+      "type": "local",
+      "command": ["uvx", "mcp-obsidian"],
+      "enabled": true,
+      "environment": {
+        "OBSIDIAN_API_KEY": "your_api_key_here",
+        "OBSIDIAN_HOST": "127.0.0.1",
+        "OBSIDIAN_PORT": "27124"
+      }
+    }
+  }
+}
+```
+</details>
+
+<details>
+  <summary>Development/Unpublished Server Configuration</summary>
+
+```json
+{
+  "mcp": {
+    "mcp-obsidian": {
+      "type": "local",
+      "command": ["uv", "run", "--directory", "/path/to/mcp-obsidian", "mcp-obsidian"],
+      "enabled": true,
+      "environment": {
+        "OBSIDIAN_API_KEY": "your_api_key_here",
+        "OBSIDIAN_HOST": "127.0.0.1",
+        "OBSIDIAN_PORT": "27124"
+      }
+    }
+  }
+}
+```
+</details>
+
+##### Managing the Server with OpenCode CLI
+
+Once configured, you can manage the MCP server using OpenCode's CLI commands:
+
+```bash
+# Enable the server
+opencode mcp enable mcp-obsidian
+
+# Disable the server
+opencode mcp disable mcp-obsidian
+
+# Toggle the server on/off
+opencode mcp toggle mcp-obsidian
+
+# Get server information
+opencode mcp info mcp-obsidian
+
+# Remove the server configuration
+opencode mcp remove mcp-obsidian
+```
+
+##### Using Environment Variables
+
+For better security, you can reference environment variables in your configuration using `{env:VAR_NAME}` syntax:
+
+```json
+{
+  "mcp": {
+    "mcp-obsidian": {
+      "type": "local",
+      "command": ["uvx", "mcp-obsidian"],
+      "enabled": true,
+      "environment": {
+        "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}",
+        "OBSIDIAN_HOST": "{env:OBSIDIAN_HOST}",
+        "OBSIDIAN_PORT": "{env:OBSIDIAN_PORT}"
+      }
+    }
+  }
+}
+```
+
+Then set these environment variables in your shell before running OpenCode:
+
+```bash
+export OBSIDIAN_API_KEY=<your_api_key_here>
+export OBSIDIAN_HOST=127.0.0.1
+export OBSIDIAN_PORT=27124
+```
+
 ## Development
 
 ### Building
