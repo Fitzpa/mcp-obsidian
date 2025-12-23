@@ -227,7 +227,7 @@ For better security, you can reference environment variables in your configurati
 Then set these environment variables in your shell before running OpenCode:
 
 ```bash
-export OBSIDIAN_API_KEY=your_api_key_here
+export OBSIDIAN_API_KEY=<your_api_key_here>
 export OBSIDIAN_HOST=127.0.0.1
 export OBSIDIAN_PORT=27124
 ```
